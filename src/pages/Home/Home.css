@@ -1,0 +1,35 @@
+div {
+    
+    text-align: center;
+    color:#F7E734;
+  }
+  iframe{
+    border: none;
+background-color: black;
+margin-bottom: 35px;
+margin-top: 50px;
+  }
+ button.call{
+    background-color: black;
+    border-radius: 8px;
+    border-color: #ff9800;
+    border-width: 1px;
+    border: 2px solid black;
+   
+    color: #F7E734;
+        padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+ }
+ button.whatsapp{
+    background-color: black;
+    border-radius: 8px;
+    border-color: #F7E734;
+    border-width: 1px;
+    border: 2px solid black;
+   
+    color: #F7E734;
+        padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+ }

@@ -1,0 +1,12 @@
+title, ion-card-title{
+    color: #F7E734;
+}
+.content, .toolbar, .footer{
+   --background: #151511;
+ 
+}
+
+.MyCard{
+   --background: #12140a;
+   color: white;
+}

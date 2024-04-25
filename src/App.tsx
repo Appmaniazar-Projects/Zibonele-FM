@@ -1,7 +1,10 @@
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
+import { Menu } from './components/Menu/Menu';
+
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -21,21 +24,28 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Events from './pages/Events/Events'
+import LineUp from './pages/LineUp/LineUp';
+import Profiles from './pages/Profiles/Profiles';
+import SocialMedia from './pages/SocialMedia/SocialMedia';
+
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
+      <Menu />
+      <IonRouterOutlet id="main">
+        <Route path="/home" component={Home} exact={true} />
+        <Route path="/Events" component={Events} exact={true} />
+        <Route path="/LineUp" component={LineUp} exact={true} />
+        <Route path="/Profiles" component={Profiles} exact={true} />
+        <Route path="/SocialMedia" component={SocialMedia} exact={true} />
+        <Route exact path="/" render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>
     </IonReactRouter>
+   
   </IonApp>
 );
 
