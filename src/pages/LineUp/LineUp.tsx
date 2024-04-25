@@ -10,9 +10,7 @@ const LineUp: React.FC = () => {
       <IonHeader>
         <IonToolbar className='toolbar'>
           <IonTitle class="title">LineUp</IonTitle>
-          <IonButtons slot="end">
-            {/* custom component */}
-          </IonButtons>
+          
           <IonButtons slot="start">
             <IonBackButton defaultHref="/home" />
           </IonButtons>
