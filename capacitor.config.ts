@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.zibonelefm1234',
+  appId: 'com.zibonelefm.appmaniazar',
   appName: 'Zibonele FM',
   webDir: 'build',
   bundledWebRuntime: false
