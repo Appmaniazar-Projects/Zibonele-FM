@@ -1,4 +1,4 @@
-package io.ionic.zibonelefm1234;
+package com.zibonelefm.appmaniazar;
 
 import com.getcapacitor.BridgeActivity;
 
