@@ -1,10 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IonBackButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonFooter, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import './LineUp.css'; 
 
 const LineUp: React.FC = () => {
+
+  useEffect(() => {
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.day-content');
+
+    function showContentForDay(day: string) {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(content => content.classList.remove('active'));
+
+        document.querySelector(`.tab[data-day="${day}"]`)?.classList.add('active');
+        document.getElementById(day)?.classList.add('active');
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const day = tab.getAttribute('data-day');
+            if (day) {
+                showContentForDay(day);
+            }
+        });
+    });
+
+    showContentForDay('mon');
+
+    // Cleanup event listeners on component unmount
+    return () => {
+        tabs.forEach(tab => {
+            tab.removeEventListener('click', () => {
+                const day = tab.getAttribute('data-day');
+                if (day) {
+                    showContentForDay(day);
+                }
+            });
+        });
+    };
+}, []);
+
   return (
     <IonPage>
       <IonHeader>
@@ -17,564 +54,73 @@ const LineUp: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className='content'>
-        <Swiper className='slides'>
-          <SwiperSlide>
-            <IonCard className='card'>
-              {/* Monday schedule */}
-              <IonCardHeader>
-                <IonCardTitle className='title'>Monday
-                </IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                <IonCardTitle>Ezidla Umzi</IonCardTitle>
-                <IonCardSubtitle> 00:00-03:00
-                </IonCardSubtitle>
-                Lenny Makhasi
-              </IonCardContent>
-              
-              <IonCardContent> <IonCardTitle> Itshayile</IonCardTitle>
-
-                <IonCardSubtitle> 03:00-05:00
-                </IonCardSubtitle>
-                Sisipho Geni
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Umyalezo Wosuku</IonCardTitle>
-                <IonCardSubtitle> 04:50-05:00
-                </IonCardSubtitle>
-                Rev Cebisile Vellem
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Sihamba Nawe </IonCardTitle>
-                <IonCardSubtitle> 06:00-09:00
-
-                </IonCardSubtitle>
-                Bongani Matenjwa,
-                Lelethu Ndlabu and
-                Sports Presenter
-                Mawonga Mgwatyu
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Esithebeni Nosapho</IonCardTitle>
-                <IonCardSubtitle> 09:00-12:00
-                </IonCardSubtitle>
-                Tabita Busani
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle> Kuyenzeka</IonCardTitle>
-                <IonCardSubtitle> 12:00-15:00
-                </IonCardSubtitle>
-                Pastor Abraham
-                Shiyani
-              </IonCardContent>
-              <IonCardContent>
-                <IonCardTitle>Isiphithiphithi</IonCardTitle>
-                <IonCardSubtitle> 15:00-18:00
-                </IonCardSubtitle>
-                Samkelo Nqayi,
-                Nomaphelo
-                Gqirhana and
-                Lindikhaya Qunta
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Ezemidlalo</IonCardTitle>
-                <IonCardSubtitle> 19:00-20:00
-                </IonCardSubtitle>
-                Sakhiwo Sam,
-                Sinethemba
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Masifundisane</IonCardTitle>
-                <IonCardSubtitle> 20:00-00:00
-                </IonCardSubtitle>
-                Sisipo Geni
-              </IonCardContent>
-              {/* Slide content */}
-            </IonCard>
-            
-
-          {/* Tuesday schedule */}
-          <IonCard className='card'>
-              <IonCardHeader>
-                <IonCardTitle className='title'>Tuesday
-                </IonCardTitle>
-              </IonCardHeader>
-
-
-              <IonCardContent>
-                <IonCardTitle>Ezidla Umzi</IonCardTitle>
-                <IonCardSubtitle> 00:00-03:00
-                </IonCardSubtitle>
-                Lenny Makhasi
-              </IonCardContent>
-              <IonCardContent>
-                <IonCardTitle>Itshayile</IonCardTitle>
-                <IonCardSubtitle> 03:00-05:00
-                </IonCardSubtitle>
-                Sisipho Geni
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Sihamba Nawe 629</IonCardTitle>
-                <IonCardSubtitle> 06:00-09:00
-                </IonCardSubtitle>
-                Bongani Matenjwa,
-                Lelethu Ndlabu and
-                Sports Presenter
-                Mawonga Mgwatyu
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Esithebeni Nosapho</IonCardTitle>
-                <IonCardSubtitle> 09:00-12:00
-                </IonCardSubtitle>
-                Tabita Busani
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Ezopuhliso / Developmental Issues</IonCardTitle>
-                <IonCardSubtitle> 12:00- 15:00
-                </IonCardSubtitle>
-                Fundi Ntshwanti
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Isiphithiphithi</IonCardTitle>
-                <IonCardSubtitle> 15:00-18:00
-                </IonCardSubtitle>
-                Samkelo Nqayi,
-                Nomaphelo
-                Gqirhana and
-                Lindikhaya Qunta
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Ezemidlalo</IonCardTitle>
-                <IonCardSubtitle> 19:00-20:00
-                </IonCardSubtitle>
-                Sakhiwo Sam,
-                Sinethemba
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Ndikuthembis’  uthando</IonCardTitle>
-                <IonCardSubtitle>19:00-20:00
-                </IonCardSubtitle>
-                Rev Gijana &
-                Fungiwe Nkathu
-              </IonCardContent>
-
-
-            </IonCard>
-          {/* Slide content */}
-
-
-            {/* Wednesday schedule */}
-            <IonCard className='card'>
-              <IonCardHeader>
-                <IonCardTitle className='title'>Wednesday
-                </IonCardTitle>
-              </IonCardHeader>
-
-              <IonCardContent>
-                <IonCardTitle>Ezidla Umzi</IonCardTitle>
-                <IonCardSubtitle> 00:00-03:00
-                </IonCardSubtitle>
-                Thembinkosi Njokweni
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Itshayile</IonCardTitle>
-                <IonCardSubtitle> 03:00-05:00
-                </IonCardSubtitle>
-                Buyiselwa Raraza
-              </IonCardContent>
-              <IonCardContent>
-                <IonCardTitle>Umyalezo Wosuku</IonCardTitle>
-                <IonCardSubtitle> 04:50-05:00
-                </IonCardSubtitle>
-                Rev Cebisile Vellem
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Sihamba Nawe
-                  629</IonCardTitle>
-                <IonCardSubtitle> 06:00-09:00
-                </IonCardSubtitle>
-                Bongani Matenjwa,
-                Lelethu Ndlabu and
-                Sports Presenter
-                Mawonga Mgwatyu
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Esithebeni Nosapho</IonCardTitle>
-                <IonCardSubtitle> 09:00-12:00
-                </IonCardSubtitle>
-                Tabita Busani
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle> Cel’ingoma  Ndikudlalele</IonCardTitle>
-                <IonCardSubtitle> 12:00-15:00
-                </IonCardSubtitle>
-                Fundi Ntshwanti
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Isiphithiphithi</IonCardTitle>
-                <IonCardSubtitle> 15:00-18:00
-                </IonCardSubtitle>
-                Samkelo Nqayi,
-                Nomaphelo
-                Gqirhana and
-                Lindikhaya Qunta
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle> Ezemidlalo</IonCardTitle>
-                <IonCardSubtitle> 19:00-20:00
-                </IonCardSubtitle>
-                Sakhiwo Sam,
-                Sinethemba
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle> Ingcambu Zevangeli</IonCardTitle>
-                <IonCardSubtitle> 20:00-00:00
-                </IonCardSubtitle>
-                Mr. Xola Skhosana
-                & Nosie Dyantyi
-                Mawanda
-              </IonCardContent>
-
-            </IonCard>
-            {/* Slide content */}
-
-
-            {/* Thursday schedule */}
-            <IonCard className='card'>
-              <IonCardHeader>
-                <IonCardTitle className='title' >Thursday
-                </IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                <IonCardTitle>Ezidla Umzi</IonCardTitle>
-                <IonCardSubtitle> 00:00-03:00
-                </IonCardSubtitle>
-                Lenny Makhasi
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Itshayile</IonCardTitle>
-                <IonCardSubtitle> 03:00-05:00
-                </IonCardSubtitle>
-                Sisipho Geni
-              </IonCardContent>
-              <IonCardContent>
-                <IonCardTitle>Umyalezo Wosuku</IonCardTitle>
-                <IonCardSubtitle> 04:50-05:00
-                </IonCardSubtitle>
-                Rev Cebisile Vellem
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Sihamba Nawe
-                  629</IonCardTitle>
-                <IonCardSubtitle> 06:00-09:00
-                </IonCardSubtitle>
-                Bongani Matenjwa,
-                Lelethu Ndlabu and
-                Sports Presenter
-                Mawonga Mgwatyu
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Thob’isandla sakho Yehova </IonCardTitle>
-                <IonCardSubtitle> 9h:00 - 12h:00
-                </IonCardSubtitle>
-                Rev N. Malangeni
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Ezopuhliso / Developmental Issues</IonCardTitle>
-                <IonCardSubtitle> 12:00- 15:00
-                </IonCardSubtitle>
-                Bongani Matenjwa
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Isiphithiphithi</IonCardTitle>
-                <IonCardSubtitle> 15:00-18:00
-                </IonCardSubtitle>
-                Fundi Ntshwanti & Samkelo Nqayi, Mawonga Mgwatyu
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Ezemidlalo</IonCardTitle>
-                <IonCardSubtitle> 19:00-20:00
-                </IonCardSubtitle>
-                Sibongile Manga, & Sakhiwo Sam, Mawonga Mgwatyu
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle> Intlalo Yomtshato</IonCardTitle>
-                <IonCardSubtitle> 20:00-24:00
-                </IonCardSubtitle>
-                Rev Ntobeko Gijana
-                & Promise Mkonza
-              </IonCardContent>
-            </IonCard>
-            {/* Slide content */}
-
-            {/* Friday schedule */}
-            <IonCard className='card'>
-              <IonCardHeader>
-                <IonCardTitle className='title'>Friday
-                </IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                <IonCardTitle>Zibondiwe</IonCardTitle>
-                <IonCardSubtitle> 00:00-03:00
-                </IonCardSubtitle>
-                Mawonga Mgwatyu, Ntobsie Mcetywa & Lindikhaya Qunta
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Umyalezo Wosuku</IonCardTitle>
-                <IonCardSubtitle> 04:50-05:00
-                </IonCardSubtitle>
-                Rev Cebisile Vellem
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle> Sihamba Nawe
-                  629</IonCardTitle>
-                <IonCardSubtitle> 06:00-09:00
-                </IonCardSubtitle>
-                Bongani Matenjwa,
-                Lelethu Ndlabu and
-                Sports Presenter
-                Mawonga Mgwatyu
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle> Unyango Lwesintu</IonCardTitle>
-                <IonCardSubtitle> 11:00-12:00
-                </IonCardSubtitle>
-                Sive Mjanyana
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle> Friday
-                  Dedications</IonCardTitle>
-                <IonCardSubtitle> 12:00-15:00
-                </IonCardSubtitle>
-                Fundi Ntshwanti
-              </IonCardContent>
-              <IonCardTitle>Isiphithiphithi</IonCardTitle>
-              <IonCardContent>
-                <IonCardSubtitle> 15:00-18:00
-                </IonCardSubtitle>
-                Samkelo Nqayi,
-                Nomaphelo
-                Gqirhana and
-                Lindikhaya Qunta
-              </IonCardContent>
-
-              {/* <IonCardContent>
-           <IonCardSubtitle> 19:00-20:00 -  Ezemidlalo
-             </IonCardSubtitle>
-            Sibongile Manga, & Sakhiwo Sam, Mawonga Mgwatyu
-           </IonCardContent> */}
-
-              <IonCardContent>
-                <IonCardTitle>Ezakuthi Iingoma</IonCardTitle>
-                <IonCardSubtitle> 19:00-21:00
-                </IonCardSubtitle>
-                Lunga Mgamle
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>SGubu Sekhasi</IonCardTitle>
-                <IonCardSubtitle> 21:00- 00:00
-                </IonCardSubtitle>
-                Ntobsie Mcetywa &
-                Lindikhaya Qunta
-              </IonCardContent>
-
-
-
-            </IonCard>
-            {/* Slide content */}
-
-            {/* Saturday schedule */}
-            <IonCard className='card'>
-              <IonCardHeader>
-                <IonCardTitle className='title'>Saturday
-                </IonCardTitle>
-              </IonCardHeader>
-
-              <IonCardContent>
-                <IonCardTitle>Mnandi
-                  Breakfast</IonCardTitle>
-                <IonCardSubtitle> 03:00-06:00
-                </IonCardSubtitle>
-                Nomaphelo
-                Gqirhana &
-                Sivuyisiwe Mahela
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Sports
-                  Parliament</IonCardTitle>
-                <IonCardSubtitle> 06:00-08:00
-                </IonCardSubtitle>
-                Sakhiwo Sam &
-                Sibongile Manga
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>  Umntwana
-                  Likhamva</IonCardTitle>
-                <IonCardSubtitle> 08:00-09:00
-                </IonCardSubtitle>
-                Ntobsie Mcetywa
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Siguguth’
-                  unxhweme</IonCardTitle>
-                <IonCardSubtitle> 09:00-12:00
-                </IonCardSubtitle>
-                Siyaxola Sobantu
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Ikwayala Zethu</IonCardTitle>
-                <IonCardSubtitle> 12:00-13:00
-                </IonCardSubtitle>
-                Sisipho Geni
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Unako</IonCardTitle>
-                <IonCardSubtitle> 13:00-15:00
-                </IonCardSubtitle>
-                Sive Mjanyana
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Ayatshis’
-                  Amateki</IonCardTitle>
-                <IonCardSubtitle> 15:00-18:00
-                </IonCardSubtitle>
-                Sibongile Manga
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Yonwaba Nathi</IonCardTitle>
-                <IonCardSubtitle> 20:00-21:00
-                </IonCardSubtitle>
-                Samkelo Nkqayi
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Yonwaba Nathi</IonCardTitle>
-                <IonCardSubtitle> 21:00-00:00
-                </IonCardSubtitle>
-                Olethokuhle Qinisile
-              </IonCardContent>
-
-            </IonCard>
-            {/* Slide content */}
-
-            {/* Sunday schedule */}
-            <IonCard className='card'>
-              <IonCardHeader>
-                <IonCardTitle className='title'>Sunday
-                </IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                <IonCardTitle>Ezincamis’
-                  Umxhelo</IonCardTitle>
-                <IonCardSubtitle> 00:00-03:00
-                </IonCardSubtitle>
-                Malibongwe
-                Nqanqase
-              </IonCardContent>
-              <IonCardContent>
-                <IonCardTitle>Masivuke</IonCardTitle>
-                <IonCardSubtitle> 03:00-06:00
-                </IonCardSubtitle>
-                Nomonde
-                Jolimvaba
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Hamba Vangeli </IonCardTitle>
-                <IonCardSubtitle> 06:00-09:00
-                </IonCardSubtitle>
-                Neliswa Zotani
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Sunday Chill</IonCardTitle>
-                <IonCardSubtitle> 09:00-12:00
-                </IonCardSubtitle>
-                Fundi Ntshwanti
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Isisele Solwazi</IonCardTitle>
-                <IonCardSubtitle> 12:00-15:00
-                </IonCardSubtitle>
-                Sive Mjanyana
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Ebukhoneni</IonCardTitle>
-                <IonCardSubtitle> 15:00-18:00
-                  Bakhe
-                </IonCardSubtitle>
-                Buyiselwa Raraza
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Uhadi Lwakho</IonCardTitle>
-                <IonCardSubtitle> 18:00-19:00
-                </IonCardSubtitle>
-                Mzondeleli Gampu
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Abefundisi</IonCardTitle>
-                <IonCardSubtitle> 19:00-20:00
-                </IonCardSubtitle>
-                Abefundisi
-              </IonCardContent>
-
-              <IonCardContent>
-                <IonCardTitle>Uhlangulo
-                  Lomphefumlo</IonCardTitle>
-                <IonCardSubtitle> 20:00-00:00
-                </IonCardSubtitle>
-                Rev Gijana &
-                Fungiwe Nkathu
-              </IonCardContent>
-
-            </IonCard>
-            {/* Slide content */}
-
-          </SwiperSlide>
-{/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
-        </Swiper>
+        {/* New layout for line up */}
+        <div className="tabs-container">
+                <div className="tabs">
+                    <div className="tab" data-day="mon">Monday</div>
+                    <div className="tab" data-day="tue">Tuesday</div>
+                    <div className="tab" data-day="wed">Wednesday</div>
+                    <div className="tab" data-day="thu">Thu</div>
+                    <div className="tab" data-day="fri">Fri</div>
+                    <div className="tab" data-day="sat">Sat</div>
+                    <div className="tab" data-day="sun">Sun</div>
+                </div>
+        </div>
+            <div className="content">
+                <div className="day-content" id="mon">
+                    <div className="container">
+                        <main className="row">
+                            <section className="col">
+                                <div className="contents">
+                                    <div className="box">
+                                        <h4>00:00 - 03:00</h4>
+                                        <h3>Ezidla Umzi</h3>
+                                        {/* <p>A show by Lenny Makhasi where people voice out their family problems</p> */}
+                                        <p>Lenny Makhasi</p>
+                                    </div>
+                                    <div className="box">
+                                        <h4>03:00 - 04:50</h4>
+                                        <h3>Itshayile</h3>
+                                        <p>Sisipho Geni </p>
+                                    </div>
+                                    <div className="box">
+                                        <h4>04:50 - 05:00</h4>
+                                        <h3>Umyalezo Wosuku</h3>
+                                        <p>Rev Cebisile Vellem</p>
+                                    </div>
+                                    <div className="box">
+                                        <h4>04:50 - 05:00</h4>
+                                        <h3>Umyalezo Wosuku</h3>
+                                        <p>Rev Cebisile Vellem</p>
+                                    </div>
+                                    <div className="box">
+                                        <h4>04:50 - 05:00</h4>
+                                        <h3>Umyalezo Wosuku</h3>
+                                        <p>Rev Cebisile Vellem</p>
+                                    </div>
+                                    <div className="box">
+                                        <h4>04:50 - 05:00</h4>
+                                        <h3>Umyalezo Wosuku</h3>
+                                        <p>Rev Cebisile Vellem</p>
+                                    </div>
+                                    <div className="box">
+                                        <h4>04:50 - 05:00</h4>
+                                        <h3>Umyalezo Wosuku</h3>
+                                        <p>Rev Cebisile Vellem</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+                </div>
+                <div className="day-content" id="tue">Content for Tuesday</div>
+                <div className="day-content" id="wed">Content for Wednesday</div>
+                <div className="day-content" id="thu">Content for Thursday</div>
+                <div className="day-content" id="fri">Content for Friday</div>
+                <div className="day-content" id="sat">Content for Saturday</div>
+                <div className="day-content" id="sun">Content for Sunday</div>
+            </div>
+        {/* End of it here */}
       </IonContent>
       <IonFooter>
         <IonToolbar className='footer'>
