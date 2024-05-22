@@ -8,5 +8,115 @@ title, ion-card-title{
 
 .MyCard{
    --background: #12140a;
-   color: white;
+   /* color: white; */
+}
+
+/* Body styling to allow scrolling and centering content */
+body {
+   font-family: Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+   background-color: #222;
+   color: #ccc;
+   display: flex;
+   justify-content: center;
+}
+
+
+/* Container styling */
+.event-container {
+   padding: 80px 20px 20px; /* Add top padding to avoid overlap with fixed search bar */
+   width: 100%;
+   max-width: 600px; /* Maximum width for the container */
+   box-sizing: border-box; /* Include padding in the width */
+   display: flex;
+   flex-direction: column;
+   align-items: center; /* Center the content horizontally */
+}
+
+/* Styles for the sticky search bar */
+.search-bar {
+   position: fixed;
+   /* top: 40; */
+   left: 0;
+   right: 0;
+   z-index: 1000;
+   padding: 10px;
+   margin: 0;
+   border: none;
+   border-radius: 0; /* Remove border-radius for fixed position */
+   background-color: #333; /* Dark background */
+   color: #ccc; /* Light text color */
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add shadow for better visibility */
+}
+
+
+
+/* Event card styling */
+.event-card {
+   display: flex;
+   flex-direction: row;
+   background-color: #333;
+   border-radius: 10px;
+   overflow: hidden;
+   margin-bottom: 20px;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   width: 100%; /* Make event cards take full width of container */
+   max-width: 600px; /* Ensure event cards don't exceed container's max width */
+}
+
+.event-image {
+   width: 40%;
+   height: auto;
+   object-fit: cover;
+}
+
+.event-details {
+   padding: 15px;
+   width: 60%;
+}
+
+.event-title {
+   margin: 0;
+   font-size: 1.5em;
+}
+
+.event-info {
+   margin: 5px 0;
+   color: #cfc994;
+}
+
+.event-description {
+   margin: 10px 0;
+   color: #9b9b9b;
+}
+
+.rsvp-button {
+   background-color: #e6cf00;
+   color: #000000;
+   font-weight: bold;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.rsvp-button:hover {
+   background-color: #b39800;
+}
+
+/* Ensure the layout is consistent even on small screens */
+@media (max-width: 600px) {
+   .event-card {
+       flex-direction: row;
+   }
+
+   .event-image {
+       width: 50%;
+   }
+
+   .event-details {
+       width: 60%;
+       padding: 10px;
+   }
 }
