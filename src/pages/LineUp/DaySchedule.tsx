@@ -10,17 +10,20 @@ interface DayScheduleProps {
     }[];
 }
 
-const DaySchedule: React.FC<DayScheduleProps> = ({ schedule }) => (
-    <div className="contents">
-        {schedule.map((item, index) => (
-            <Box
-                key={index}
-                time={item.time}
-                title={item.title}
-                description={item.description}
-            />
-        ))}
-    </div>
-);
+const DaySchedule: React.FC<DayScheduleProps> = ({ schedule }) => {
+    console.log('Schedule for the Day:', schedule); // Debugging line
+    return (
+        <div className="contents">
+            {schedule.map((item, index) => (
+                <Box
+                    key={index}
+                    time={item.time}
+                    title={item.title}
+                    description={item.description}
+                />
+            ))}
+        </div>
+    );
+};
 
 export default DaySchedule;
