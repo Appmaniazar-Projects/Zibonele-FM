@@ -1,18 +1,16 @@
 .tabs-container {
 	position: fixed;
-	/* top: 0; */
 	width: 100%;
 	background-color: #131212;
 	border-bottom: 1px solid #F7E734;
-    /* border-top: 1px solid #F7E734; */
 	z-index: 1000;
 }
-
+ 
 .tabs {
 	display: flex;
 	overflow-x: auto;
 	white-space: nowrap;
-	/* padding: 10px 0; */
+	
 }
 
 .tab {
@@ -33,7 +31,7 @@
 }
 
 .tab.active {
-	/* background-color: #d82828; */
+	
     font-weight: bolder;
     font-size: medium;
     color: #F7E734;
@@ -41,29 +39,23 @@
 
 .content {
 	margin-top: 20px;
-	/* Adjust based on the height of your tabs */
+	width: 100%;
 	padding: 20px;
-	/* color: red; */
-}
-
-.day-content {
-	display: none;
+	
 }
 
 .day-content.active {
 	display: block;
 }
 
-/* Hide scrollbar in a modern way */
 .tabs::-webkit-scrollbar {
 	display: none;
 }
 
 .tabs {
 	-ms-overflow-style: none;
-	/* IE and Edge */
 	scrollbar-width: none;
-	/* Firefox */
+
 }
 
 .container{
@@ -86,6 +78,7 @@ main.row{
 .col .contents{
 	padding: 0px 30px;
 	border-left: 2px solid #bababa;
+	
 }
 .col .contents .box{
 	position: relative;
@@ -96,6 +89,8 @@ main.row{
 	cursor: pointer;
 	transition: all 0.4s;
 	margin-bottom: 20px;
+	width:100%;
+	
 }
 .col .contents .box:hover{
 	box-shadow: 0px 3px 12px 0px rgb(87, 87, 87);
@@ -117,16 +112,16 @@ main.row{
 	color: #555555;
 }
 .box h3{
-	/* font-size: px; */
-	/* padding: 5px 0px 6px; */
+
 	font-family: helvetica;
 	color: #F7E734;
 }
 .box p{
 	line-height: 1.2;
 	color: rgb(204, 204, 204);
-	/* font-size: 17px; */
+	
 }
+
 @media(max-width: 768px){
 	main.row{
 		grid-template-columns: 1fr;
