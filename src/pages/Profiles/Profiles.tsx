@@ -1,12 +1,27 @@
 import {  IonBackButton, IonButtons, IonContent, IonFooter, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // import './Profiles.css'
 import { NavButtons } from '../../components/Navbuttons/Navbuttons';
 import ProfileCard from './ProfileCard';
 import { Profile } from './profile'; // Import the Profile type from data.ts
 import profileData from './profile'; // Import the profile data
+import { fetchProfiles } from '../../services/dataService';
 
 const Profiles: React.FC = () => {
+
+  const [profileData, setProfileData] = useState<Profile[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const profiles = await fetchProfiles();
+        setProfileData(profiles);
+      } catch (error) {
+        console.error("Error fetching profiles:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <IonPage>
@@ -25,8 +40,8 @@ const Profiles: React.FC = () => {
       <IonContent className='content'>
       {/* Start here */}
         <div className="card-container">
-          {profileData.map((profile: Profile) => (
-            <ProfileCard key={profile.id} profile={profile} />
+        {profileData.slice(1).map((profile: Profile) => (
+            <ProfileCard key={profile.id} profile={profile} />        
           ))}
         </div>
       {/* End here */}
