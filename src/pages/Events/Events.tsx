@@ -1,11 +1,28 @@
 import { 
   IonBackButton, IonButtons, IonContent, IonFooter, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React from 'react';
+  import React, { useState, useEffect } from 'react';
 import './Events.css'
 import { NavButtons } from '../../components/Navbuttons/Navbuttons';
 import EventCard from './EventCard';
-import { events } from './event';
+import { fetchEvents } from '../../services/dataService';
+
+
 const Events: React.FC = () => {
+
+  const [events, setEvents] = useState<any[]>([]);
+
+  useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const eventsData = await fetchEvents();
+              setEvents(eventsData || []);
+          } catch (error) {
+              console.error("Error fetching events:", error);
+          }
+      };
+
+      fetchData();
+  }, []);
 
   return (
     <IonPage>
