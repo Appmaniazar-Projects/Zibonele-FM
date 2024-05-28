@@ -27,19 +27,11 @@ import Events from './pages/Events/Events';
 import LineUp from './pages/LineUp/LineUp';
 import Profiles from './pages/Profiles/Profiles';
 import SocialMedia from './pages/SocialMedia/SocialMedia';
-import profileData from './pages/Profiles/profile'; // adjust import based on your file structure
-import { weeklySchedule } from './pages/LineUp/data'; // adjust import based on your file structure
-import { events } from './pages/Events/event'; // adjust import based on your file structure
-import { uploadProfiles, uploadEvents, uploadSchedule } from './services/dataService';
+
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  useEffect(() => {
-    uploadProfiles(profileData);
-    uploadEvents(events);
-    uploadSchedule(weeklySchedule);
-  }, []);
 
   return (
     <IonApp>
