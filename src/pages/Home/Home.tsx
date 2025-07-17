@@ -23,23 +23,27 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="toolbar">
-          <IonTitle>
-            <div className="img-title">
+
+            {/* <div className="img-title">
               <img
                 src="assets/img/Zibonele.png"
-                width="40px"
-                height="40px"
+                width="60px"
+                height="60px"
                 alt=""
               />
-            </div>
-          </IonTitle>
+            </div> */}
+          
           <IonButtons slot="end">
             <NavButtons />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent className="content" >
-      <iframe src="https://iframe.iono.fm/s/74?accent=F7E734&background=000000&border=000000&text=F7E734&rounded=0&layout=square" width="300" height="300" ></iframe>
+      <iframe src="https://iframe.iono.fm/s/74?accent=F7E734&background=000000&border=000000&text=F7E734&rounded=0&layout=square"
+       width="350" 
+       height="350" >
+
+       </iframe>
         <IonGrid>
   <IonRow>
     <IonCol>

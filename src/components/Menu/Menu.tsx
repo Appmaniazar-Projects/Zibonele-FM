@@ -28,8 +28,8 @@ import {
               <div className="img-title">
                 <img
                   src="assets/img/Zibonele.png"
-                  width="300px"
-                  height="200px"
+                  width="400px"
+                  height="300px"
                   alt=""
                 />
               </div>

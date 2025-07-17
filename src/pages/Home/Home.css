@@ -1,35 +1,36 @@
 div {
-    
-    text-align: center;
-    color:#F7E734;
-  }
-  iframe{
-    border: none;
-background-color: black;
-margin-bottom: 35px;
-margin-top: 50px;
-  }
- button.call{
-    background-color: black;
-    border-radius: 8px;
-    border-color: #ff9800;
-    border-width: 1px;
-    border: 2px solid black;
-   
-    color: #F7E734;
-        padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
- }
- button.whatsapp{
-    background-color: black;
-    border-radius: 8px;
-    border-color: #F7E734;
-    border-width: 1px;
-    border: 2px solid black;
-   
-    color: #F7E734;
-        padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
- }
+  text-align: center;
+  /* color: #8b8b8b; */
+  color: #F7E734;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* 
+.img-title {
+  margin-right: auto;
+} */
+
+iframe {
+  border: none;
+  background-color: black;
+  margin-bottom: 135px;
+  /* margin-top: 50px; */
+}
+
+.call,
+.whatsapp {
+  /* background-color: black; */
+  border-radius: 8px;
+  border-width: 1px;
+  /* border: 2px solid black; */
+  box-shadow: 0 4px 4px rgba(29, 29, 29, 0.1);
+
+  color: #F7E734;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
