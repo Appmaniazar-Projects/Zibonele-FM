@@ -1,9 +1,20 @@
-.img-title {
-    /* align-items: center; */
-    /* margin-top: 10px; */
-    /* margin-bottom: 10px; */
-   
+/* Remove black line under the header toolbar */
+.menu-toolbar {
+  --border-width: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
 
-  }
+/* Remove black separator lines between menu items */
+.ion-item {
+  --inner-border-width: 0 !important;
+  --border-width: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
 
-
+/* Optional: remove list dividers */
+ion-list {
+  --border-width: 0 !important;
+  border: none !important;
+}

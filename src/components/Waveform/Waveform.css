@@ -1,0 +1,41 @@
+.waveform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 100%;
+  width: 100%;
+  padding: 15%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.waveform-bar {
+  width: 4px;
+  height: 20%;
+  background-color: var(--bar-color, #D4AF37);
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  will-change: transform, opacity;
+}
+
+.waveform-bar.animate {
+  opacity: 0.6;
+  animation: waveform-animation 1.8s ease-in-out infinite;
+  animation-delay: var(--animation-delay, 0s);
+}
+
+@keyframes waveform-animation {
+  0%, 100% {
+    transform: scaleY(0.6);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scaleY(1.8);
+    opacity: 0.9;
+  }
+}

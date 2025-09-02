@@ -1,11 +1,21 @@
 // data.ts
 
+export interface SocialMedia {
+  twitter?: string;
+  facebook?: string;
+  instagram?: string;
+  youtube?: string;
+}
+
 export interface Profile {
-    id: number;
+    id: number | string;
     name: string;
     schedule: string;
     author: string;
     imageUrl: string;
+    role?: string;
+    bio?: string;
+    socialMedia?: SocialMedia;
 }
 
 const profileData: Profile[] = [

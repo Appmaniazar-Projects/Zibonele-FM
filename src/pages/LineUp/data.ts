@@ -11,7 +11,7 @@ export const weeklySchedule: Record<Day, { time: string; title: string; descript
         // Add more slots as needed
     ],
     tue: [
-        { time: "00:00 - 03:00", title: "Tuesday Show 1", description: "Host 1" },
+        { time: "00:00 - 03:00", title: "Tuesday Show 1", description: "Lenny the DJ" },
         { time: "03:00 - 04:50", title: "Tuesday Show 2", description: "Host 2" },
         // Add more slots as needed
     ],
@@ -27,7 +27,7 @@ export const weeklySchedule: Record<Day, { time: string; title: string; descript
         // Add more slots as needed
     ],
     fri: [
-        { time: "00:00 - 03:00", title: "Friday Show 1", description: "Host 1" },
+        { time: "00:00 - 03:00", title: "Breakfast", description: "Lenny the DJ" },
         { time: "03:00 - 04:50", title: "Friday Show 2", description: "Host 2" },
         // Add more slots as needed
     ],

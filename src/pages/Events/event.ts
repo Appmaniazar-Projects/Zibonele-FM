@@ -10,7 +10,7 @@ export interface Event {
 export const events: Event[] = [
     {
         title: "Business Breakfast",
-        date: "12 Jun 2022 at 10:00",
+        date: "13 Jun 2022 at 10:01",
         location: "Khayelitsha",
         description: "A business breakfast event for local bussinesses to network.",
         imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5f/Brunch_Set_up.jpg", // You can use an online image URL as well

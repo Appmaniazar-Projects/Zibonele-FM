@@ -1,12 +1,76 @@
-ion-content.background{
-    --background: url(../../../public/assets/img/Radio.png) 0 0/100% 100% no-repeat;
+ion-content.background {
+  --background: url(../../../public/assets/img/Radio.png) 0 0/100% 100% no-repeat;
+  --padding-top: 80px; /* Add padding to move content below header */
 }
 
-
-ion-fab-button{
-    color:#F7E734;
+/* Social list container */
+.social-list {
+  padding: 8px 0;
 }
 
-ion-icon{
-    font-size: 30px;
+ion-fab-button {
+  color: #F7E734;
+}
+
+ion-icon {
+  font-size: 30px;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Social link container */
+.social-link {
+  display: block;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Card styling */
+ion-card {
+  margin: 12px 16px;
+  --background: #292929;
+  --color: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Remove default link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Touch feedback */
+ion-card:active {
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Social item styles */
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 12px 16px;
+  color: white;
+}
+
+/* Icon styling */
+.social-item ion-icon {
+  color: #F7E734;
+  font-size: 1.8rem;
+}
+
+/* Label styling */
+.social-item ion-label {
+  margin: 0;
+  font-size: 1.1rem;
+  color: white;
+  text-decoration: none;
 }

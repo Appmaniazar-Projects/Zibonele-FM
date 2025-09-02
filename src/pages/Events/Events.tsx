@@ -1,11 +1,11 @@
 import { 
-  IonBackButton, IonButtons, IonContent, IonFooter, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-  import React, { useState, useEffect } from 'react';
+  IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import React, { useState, useEffect } from 'react';
 import './Events.css'
 import { NavButtons } from '../../components/Navbuttons/Navbuttons';
 import EventCard from './EventCard';
 import { fetchEvents } from '../../services/dataService';
-
+import AdBanner from '../../components/AdBanner/AdBanner';
 
 const Events: React.FC = () => {
 
@@ -48,11 +48,7 @@ const Events: React.FC = () => {
         </div>
           {/* End here */}
         </IonContent>
-        <IonFooter>
-        <IonToolbar className='footer'>
-          <IonTitle class="title">Advertise Here</IonTitle>
-        </IonToolbar>
-      </IonFooter>
+        <AdBanner />
       </IonPage>
   );
 };

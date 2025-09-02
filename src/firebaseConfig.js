@@ -1,7 +1,9 @@
 // src/firebaseConfig.js
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import { getStorage } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,5 +23,20 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const auth = getAuth(app);
+const storage = getStorage(app);
 
-export { app, database };
+// Function to get a download URL for a storage path
+const getImageUrl = async (path) => {
+  try {
+    const { getDownloadURL, ref } = await import('firebase/storage');
+    const imageRef = ref(storage, path);
+    return await getDownloadURL(imageRef);
+  } catch (error) {
+    console.error('Error getting image URL:', error);
+    return null;
+  }
+};
+
+export { app, auth, database, storage, getImageUrl };
+

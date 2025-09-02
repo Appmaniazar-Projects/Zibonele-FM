@@ -1,10 +1,41 @@
-import {  IonBackButton, IonButtons, IonContent, IonFab, IonFabButton, IonFabList, IonFooter, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import {
+  IonBackButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonLabel,
+  IonPage,
+  IonTitle,
+  IonToolbar
+} from '@ionic/react';
+import {
+  call,
+  logoFacebook,
+  logoInstagram,
+  logoTiktok,
+  logoWhatsapp
+} from 'ionicons/icons';
+
 import React from 'react';
-import './SocialMedia.css'
 import { NavButtons } from '../../components/Navbuttons/Navbuttons';
-import { call, logoFacebook, logoInstagram, logoTwitter, logoWhatsapp, share, shareSocial } from 'ionicons/icons';
+import AdBanner from '../../components/AdBanner/AdBanner';
+import './SocialMedia.css';
 
 const SocialMedia: React.FC = () => {
+  // Using direct anchor tags for better compatibility
+  const SocialLink = ({ url, icon, label }: { url: string; icon: any; label: string }) => (
+    <a href={url} target="_blank" rel="noopener noreferrer" className="social-link">
+      <IonCard>
+        <IonCardContent className="social-item">
+          <IonIcon icon={icon} className="social-icon" />
+          <IonLabel>{label}</IonLabel>
+        </IonCardContent>
+      </IonCard>
+    </a>
+  );
 
   return (
     <IonPage>
@@ -12,7 +43,7 @@ const SocialMedia: React.FC = () => {
         <IonToolbar className='toolbar'>
           <IonTitle class="title">Social Media</IonTitle>
           <IonButtons slot="end">
-            <NavButtons/>
+            <NavButtons />
           </IonButtons>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/home" />
@@ -21,46 +52,40 @@ const SocialMedia: React.FC = () => {
       </IonHeader>
 
       <IonContent className='background' fullscreen>
-      <IonFab vertical="center" horizontal="center" slot="fixed">
-          <IonFabButton>
-            <IonIcon icon={shareSocial} />
-          </IonFabButton>
-
-          <IonFabList side="top">
-          <a href="tel:0213618962"> 
-       <IonIcon className="ion-align-self-center" 
-          icon={call} size="large" 
-                color="F7E734;"></IonIcon></a>
-           
-          </IonFabList>
-          <IonFabList side="bottom">
-            <a href='https://www.facebook.com/ZiboneleFM'>
-            <IonIcon icon={logoFacebook} />
-            </a>
-           
-          </IonFabList>
-          <IonFabList side="start">
-            <a href='https://www.instagram.com/zibonelefm_98.2/'>
-            <IonIcon icon={logoInstagram} />
-            </a>
-         
-          </IonFabList>
-          <IonFabList side="end">
-            <a href='https://twitter.com/ZiboneleFM98_2'>
-            <IonIcon icon={logoTwitter} />
-            </a>
-            
-          </IonFabList>
-        </IonFab>
-       
-       
+        <div className="social-list">
+          <SocialLink 
+            url="https://www.facebook.com/share/17D2J1Emj2/" 
+            icon={logoFacebook} 
+            label="Facebook" 
+          />
+          
+          <SocialLink 
+            url="https://www.instagram.com/zibonelefm_98.2/" 
+            icon={logoInstagram} 
+            label="Instagram" 
+          />
+          
+          <SocialLink 
+            url="https://wa.me/27793165000" 
+            icon={logoWhatsapp} 
+            label="WhatsApp" 
+          />
+          
+          <SocialLink 
+            url="https://www.tiktok.com/@zibonelefm98.2" 
+            icon={logoTiktok} 
+            label="TikTok" 
+          />
+          
+          <SocialLink 
+            url="tel:+27804580000" 
+            icon={call} 
+            label="Call Us" 
+          />
+        </div>
       </IonContent>
-
-      <IonFooter>
-        <IonToolbar className='footer'>
-          <IonTitle class="title">Advertise Here</IonTitle>
-        </IonToolbar>
-      </IonFooter>
+      
+      <AdBanner />
     </IonPage>
   );
 };

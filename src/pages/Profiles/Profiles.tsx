@@ -1,14 +1,23 @@
-import {  IonBackButton, IonButtons, IonContent, IonFooter, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React, { useState, useEffect } from 'react';
-// import './Profiles.css'
+import {
+  IonBackButton,
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/react';
+import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { NavButtons } from '../../components/Navbuttons/Navbuttons';
-import ProfileCard from './ProfileCard';
-import { Profile } from './profile'; // Import the Profile type from data.ts
-import profileData from './profile'; // Import the profile data
 import { fetchProfiles } from '../../services/dataService';
+import ProfileCard from './ProfileCard';
+import { Profile } from './profile';
+import AdBanner from '../../components/AdBanner/AdBanner';
 
 const Profiles: React.FC = () => {
-
   const [profileData, setProfileData] = useState<Profile[]>([]);
 
   useEffect(() => {
@@ -23,13 +32,19 @@ const Profiles: React.FC = () => {
     fetchData();
   }, []);
 
+  const history = useHistory();
+
+  const handleProfileClick = (profileId: string | number) => {
+    history.push(`/presenters/${profileId}`);
+  };
+
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className='toolbar'>
-          <IonTitle class="title">DJ Profiles</IonTitle>
+        <IonToolbar className="toolbar">
+          <IonTitle class="title">Presenters</IonTitle>
           <IonButtons slot="end">
-            <NavButtons/>
+            <NavButtons />
           </IonButtons>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/home" />
@@ -37,21 +52,19 @@ const Profiles: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent className='content'>
-      {/* Start here */}
-        <div className="card-container">
-        {profileData.slice(1).map((profile: Profile) => (
-            <ProfileCard key={profile.id} profile={profile} />        
-          ))}
-        </div>
-      {/* End here */}
+      <IonContent className="content">
+        {profileData.map((profile: Profile) => (
+          <div 
+            key={profile.id} 
+            onClick={() => handleProfileClick(profile.id)}
+            style={{ cursor: 'pointer' }}
+          >
+            <ProfileCard profile={profile} />
+          </div>
+        ))}
       </IonContent>
-
-      <IonFooter>
-        <IonToolbar className='footer'>
-          <IonTitle class="title">Advertise Here</IonTitle>
-        </IonToolbar>
-      </IonFooter>
+      
+      <AdBanner />
     </IonPage>
   );
 };

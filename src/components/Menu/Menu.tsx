@@ -1,25 +1,24 @@
 import {
-    IonMenu,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonList,
-    IonMenuToggle,
-    IonItem,
-    IonLabel,
-    IonIcon,
-  } from "@ionic/react";
-  import {
-    homeSharp,
-    calendarSharp,
-    micSharp,
-    personSharp,
-  } from "ionicons/icons";
-  import React from "react";
-  import "./Menu.css";
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonMenu,
+  IonMenuToggle,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import {
+  calendarSharp,
+  homeSharp,
+  micSharp,
+  personSharp,
+} from "ionicons/icons";
+import "./Menu.css";
   
-  export const Menu = () => {
+const Menu = () => {
     return (
       <IonMenu side="end" contentId="main">
         <IonHeader>
@@ -39,10 +38,11 @@ import {
         <IonContent color='primary' className="menu-content">
           <IonList>
             <IonMenuToggle  auto-hide="false">
-              <IonItem color="primary"
+              <IonItem 
+                color="primary"
                 className="ion-item"
                 button
-                routerLink={"/home"}
+                routerLink="/home"
                 routerDirection="none"
               >
                 <IonIcon slot="start" icon={homeSharp}></IonIcon>
@@ -51,40 +51,44 @@ import {
             </IonMenuToggle>
   
             <IonMenuToggle auto-hide="false">
-              <IonItem color="primary"
+              <IonItem 
+                color="primary"
                 className="ion-item"
                 button
-                routerLink={"/events"}
+                routerLink="/events"
                 routerDirection="none"
               >
                 <IonIcon slot="start" icon={calendarSharp}></IonIcon>
                 <IonLabel>Events</IonLabel>
               </IonItem>
   
-              <IonItem color="primary"
+              <IonItem 
+                color="primary"
                 className="ion-item"
                 button
-                routerLink={"/lineup"}
+                routerLink="/lineup"
                 routerDirection="none"
               >
                 <IonIcon slot="start" icon={micSharp}></IonIcon>
                 <IonLabel>ShowLine Up</IonLabel>
               </IonItem>
   
-              <IonItem color="primary"
+              <IonItem 
+                color="primary"
                 className="ion-item"
                 button
-                routerLink={"/profiles"}
+                routerLink="/profiles"
                 routerDirection="none"
               >
                 <IonIcon slot="start" icon={personSharp}></IonIcon>
-                <IonLabel> DJ Profiles</IonLabel>
+                <IonLabel> Presenters</IonLabel>
               </IonItem>
   
-              <IonItem color="primary"
+              <IonItem 
+                color="primary"
                 className="ion-item"
                 button
-                routerLink={"/SocialMedia"}
+                routerLink="/social"
                 routerDirection="none"
               >
                 <IonIcon slot="start" icon={homeSharp}></IonIcon>
@@ -96,4 +100,5 @@ import {
       </IonMenu>
     );
   };
-  
+
+export default Menu;

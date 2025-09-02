@@ -1,0 +1,64 @@
+.profile-card {
+  --background: #292929; /* Dark background */
+  border-radius: 10px;
+  margin: 8px 12px;
+  padding: 8px 0;
+}
+
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+  margin: 0 12px 0 0;
+  align-self: flex-start;
+  min-width: 60px;
+}
+
+/* Default avatar now matches the size of regular avatars */
+.profile-avatar img[src*="default-avatar"] {
+  transform: none;
+  transform-origin: center top;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top; /* Aligns image to the top */
+  border-radius: 50%;
+  border: 2px solid #F7E734;
+}
+  
+.profile-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 12px;
+}
+  
+.profile-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #F7E734;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.profile-role {
+  font-size: 12px;
+  background: rgba(247, 231, 52, 0.2);
+  color: #F7E734;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+  
+.profile-schedule {
+  margin: 0;
+  font-size: 14px;
+    color: #ccc;
+  }
+  
