@@ -19,7 +19,17 @@ export type Day = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
 export const fetchProfiles = async (): Promise<Profile[]> => {
   const dbRef = ref(database);
   const snapshot = await get(child(dbRef, 'profiles'));
-  return snapshot.exists() ? snapshot.val() : [];
+  
+  if (snapshot.exists()) {
+    const profileData = snapshot.val();
+    // Convert object to array with IDs
+    return Object.entries(profileData).map(([id, profile]: [string, any]) => ({
+      id,
+      ...profile
+    }));
+  }
+  
+  return [];
 };
 
 

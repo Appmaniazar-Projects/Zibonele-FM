@@ -6,6 +6,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  IonSpinner,
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -16,14 +17,22 @@ import { Profile } from './profile';
 
 const Profiles: React.FC = () => {
   const [profileData, setProfileData] = useState<Profile[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
+        setError(null);
         const profiles = await fetchProfiles();
-        setProfileData(profiles);
+        console.log('Fetched profiles:', profiles);
+        setProfileData(Array.isArray(profiles) ? profiles : []);
       } catch (error) {
         console.error("Error fetching profiles:", error);
+        setError("Failed to load presenters. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -58,15 +67,30 @@ const Profiles: React.FC = () => {
           margin: '0 auto',
           padding: '10px 0'
         }}>
-          {profileData.map((profile: Profile) => (
-            <div 
-              key={profile.id} 
-              onClick={() => handleProfileClick(profile.id)}
-              style={{ cursor: 'pointer' }}
-            >
-              <ProfileCard profile={profile} />
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '2rem' }}>
+              <IonSpinner name="crescent" />
+              <p>Loading presenters...</p>
             </div>
-          ))}
+          ) : error ? (
+            <div style={{ textAlign: 'center', padding: '2rem', color: '#ff6b6b' }}>
+              <p>{error}</p>
+            </div>
+          ) : profileData.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '2rem' }}>
+              <p>No presenters found.</p>
+            </div>
+          ) : (
+            profileData.map((profile: Profile) => (
+              <div 
+                key={profile.id} 
+                onClick={() => handleProfileClick(profile.id)}
+                style={{ cursor: 'pointer' }}
+              >
+                <ProfileCard profile={profile} />
+              </div>
+            ))
+          )}
         </div>
       </IonContent>
     </IonPage>
