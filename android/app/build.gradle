@@ -1,16 +1,56 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
+}
+
+// Version definitions
+ext {
+    // AndroidX
+    androidxAppCompatVersion = '1.6.1'
+    androidxCoreKtxVersion = '1.12.0'
+    androidxJunitVersion = '1.1.5'
+    androidxEspressoCoreVersion = '3.5.1'
+    androidxCoordinatorLayoutVersion = '1.2.0'
+    coreSplashScreenVersion = '1.0.1'
+    
+    // Testing
+    junitVersion = '4.13.2'
+    
+    // Kotlin
+    kotlinCoroutinesVersion = '1.7.3'
+    
+    // Firebase
+    firebaseBomVersion = '32.7.0'
+    
+    // Play Services
+    playServicesAdsVersion = '23.1.0'
+    playServicesBaseVersion = '18.3.0'
+}
 
 android {
     namespace "io.ionic.zibonelefm1234"
+    
     compileSdkVersion rootProject.ext.compileSdkVersion
+    
     defaultConfig {
         applicationId "io.ionic.zibonelefm1234"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
-        versionName "1.2"
+        versionCode 6
+        versionName "1.2.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        
+        vectorDrawables.useSupportLibrary = true
+    
+    // Configure lint to create a baseline file
+    lint {
+        baseline = file("lint-baseline.xml")
+        abortOnError false
+    }
+    
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
@@ -54,32 +94,88 @@ android {
     }
 }
 
-repositories {
-    flatDir{
-        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
-    }
-}
-
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // AndroidX Core
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation "androidx.core:core-ktx:$androidxCoreKtxVersion"
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+    
+    // Capacitor
     implementation project(':capacitor-android')
+    implementation project(':capacitor-cordova-android-plugins')
+    
+    // Testing
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
-    implementation project(':capacitor-cordova-android-plugins')
     
-    // AdMob dependencies
-    implementation 'com.google.android.gms:play-services-ads:22.6.0'
+    // Media and Background Services
+    implementation 'androidx.media:media:1.7.0'
+    implementation 'androidx.media2:media2-session:1.2.1'
+    implementation 'androidx.media2:media2-player:1.2.1'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-process:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-service:2.6.2'
+    
+    // Material Components
+    implementation 'com.google.android.material:material:1.11.0'
+    
+    // Google Play Services
+    implementation 'com.google.android.gms:play-services-ads:23.1.0'
+    implementation 'com.google.android.gms:play-services-base:18.3.0'
+    
+    // Firebase
+    implementation platform("com.google.firebase:firebase-bom:$firebaseBomVersion")
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$kotlinCoroutinesVersion"
 }
 
 apply from: 'capacitor.build.gradle'
 
-try {
-    def servicesJSON = file('google-services.json')
-    if (servicesJSON.text) {
-        apply plugin: 'com.google.gms.google-services'
+// Enable Java 8 features
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
-} catch(Exception e) {
-    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+    
+    // Enable Kotlin support
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    
+    // Enable view binding
+    buildFeatures {
+        viewBinding true
+    }
+    
+    // Enable data binding
+    dataBinding {
+        enabled = true
+    }
+}
+
+// Fix for duplicate classes and dependency conflicts
+configurations.all {
+    resolutionStrategy {
+        // Force specific versions of dependencies to avoid conflicts
+        force "androidx.lifecycle:lifecycle-viewmodel:2.6.2"
+        force "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
+        force "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
+        
+        // Fail on version conflict
+        failOnVersionConflict()
+        
+        // Prefer modules that are part of this build (multi-project or composite build)
+        preferProjectModules()
+    }
 }

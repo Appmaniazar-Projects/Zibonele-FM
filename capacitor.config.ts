@@ -13,17 +13,17 @@ const config: CapacitorConfig = {
       showSpinner: false,
       splashFullScreen: true,
       splashImmersive: true,
-    },
-    AdMob: {
-      appId: 'ca-app-pub-3940256099942544~3347511713', 
-      isTesting: false, 
-      adSize: 'BANNER',
-      bannerAdId: 'ca-app-pub-5364194379349961~6147496485', 
-      interstitialAdId: 'ca-app-pub-5364194379349961/1470050567', 
-      rewardAdId: 'ca-app-pub-5364194379349961/5200308361',
-      requestTrackingAuthorization: true,
-    },
+    }
   },
+  // Enable background mode for audio playback
+  android: {
+    allowMixedContent: true,
+    captureInput: true,
+    webContentsDebuggingEnabled: true,
+  },
+  ios: {
+    contentInset: 'always',
+  }
 };
 
 export default config;

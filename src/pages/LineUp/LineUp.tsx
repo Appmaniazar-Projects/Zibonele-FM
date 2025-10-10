@@ -1,3 +1,7 @@
+import React, { useEffect, useState } from "react";
+import { ref, onValue, DataSnapshot } from "firebase/database";
+import { database } from "../../firebaseConfig";
+import { NavButtons } from '../../components/Navbuttons/Navbuttons';
 import {
   IonBackButton,
   IonButtons,
@@ -6,7 +10,6 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonContent,
-  IonFooter,
   IonHeader,
   IonLabel,
   IonPage,
@@ -14,12 +17,9 @@ import {
   IonSegmentButton,
   IonTitle,
   IonToolbar,
+  IonSpinner,
 } from '@ionic/react';
-import AdBanner from '../../components/AdBanner/AdBanner';
-import { onValue, ref } from "firebase/database";
-import React, { useEffect, useState } from "react";
-import { NavButtons } from '../../components/Navbuttons/Navbuttons';
-import { database } from "../../firebaseConfig";
+import './LineUp.css';
 
 type Show = {
   time: string;
@@ -36,16 +36,24 @@ const LineUp: React.FC = () => {
   const [selectedDay, setSelectedDay] = useState<string>('mon');
 
   useEffect(() => {
-    const scheduleRef = ref(database, "weeklySchedule");
+    try {
+      const scheduleRef = ref(database, "weeklySchedule");
 
-    // ✅ Real-time listener setup
-    const unsubscribe = onValue(scheduleRef, (snapshot) => {
-      const data = snapshot.val();
-      setSchedule(data || {});
-    });
+      // ✅ Real-time listener setup
+      const unsubscribe = onValue(scheduleRef, (snapshot: DataSnapshot) => {
+        const data = snapshot.val();
+        setSchedule(data || {});
+      });
 
-    // 🔚 Clean up the listener on unmount
-    return () => unsubscribe();
+      // 🔚 Clean up the listener on unmount
+      return () => {
+        if (typeof unsubscribe === 'function') {
+          unsubscribe();
+        }
+      };
+    } catch (error) {
+      console.error("Error setting up schedule listener:", error);
+    }
   }, []);
 
   const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -105,8 +113,6 @@ const LineUp: React.FC = () => {
           )}
         </div>
       </IonContent>
-      
-      <AdBanner />
     </IonPage>
   );
 };

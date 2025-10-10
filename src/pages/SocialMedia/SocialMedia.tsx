@@ -21,7 +21,6 @@ import {
 
 import React from 'react';
 import { NavButtons } from '../../components/Navbuttons/Navbuttons';
-import AdBanner from '../../components/AdBanner/AdBanner';
 import './SocialMedia.css';
 
 const SocialMedia: React.FC = () => {
@@ -66,7 +65,7 @@ const SocialMedia: React.FC = () => {
           />
           
           <SocialLink 
-            url="https://wa.me/27793165000" 
+            url="https://wa.me/27765515915" 
             icon={logoWhatsapp} 
             label="WhatsApp" 
           />
@@ -84,8 +83,6 @@ const SocialMedia: React.FC = () => {
           />
         </div>
       </IonContent>
-      
-      <AdBanner />
     </IonPage>
   );
 };

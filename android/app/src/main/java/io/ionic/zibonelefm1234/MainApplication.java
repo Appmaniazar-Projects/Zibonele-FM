@@ -5,7 +5,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
-public class MainApplication extends android.app.Application {
+public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -14,15 +14,8 @@ public class MainApplication extends android.app.Application {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
-                // Mobile Ads SDK is initialized
+                // Optional: Handle initialization completion
             }
         });
-        
-        // Optional: Set request configuration
-        // MobileAds.setRequestConfiguration(
-        //     new RequestConfiguration.Builder()
-        //         .setTestDeviceIds(Arrays.asList("TEST_DEVICE_ID"))
-        //         .build()
-        // );
     }
 }

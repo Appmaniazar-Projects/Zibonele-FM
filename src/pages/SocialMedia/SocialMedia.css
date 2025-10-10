@@ -1,5 +1,5 @@
 ion-content.background {
-  --background: url(../../../public/assets/img/Radio.png) 0 0/100% 100% no-repeat;
+  --background: url(../../../public/assets/img/FMRadio.png) 0 0/100% 100% no-repeat;
   --padding-top: 80px; /* Add padding to move content below header */
 }
 

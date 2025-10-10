@@ -5,7 +5,6 @@ import './Events.css'
 import { NavButtons } from '../../components/Navbuttons/Navbuttons';
 import EventCard from './EventCard';
 import { fetchEvents } from '../../services/dataService';
-import AdBanner from '../../components/AdBanner/AdBanner';
 
 const Events: React.FC = () => {
 
@@ -48,7 +47,6 @@ const Events: React.FC = () => {
         </div>
           {/* End here */}
         </IonContent>
-        <AdBanner />
       </IonPage>
   );
 };

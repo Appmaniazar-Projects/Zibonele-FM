@@ -4,4 +4,9 @@
     <string name="title_activity_main">Zibonele FM</string>
     <string name="package_name">com.zibonelefm.appmaniazar</string>
     <string name="custom_url_scheme">com.zibonelefm.appmaniazar</string>
+    
+    <!-- Notification Channel ID -->
+    <string name="default_notification_channel_id">zibonele_fm_notification_channel</string>
+    <string name="notification_channel_name">Zibonele FM Player</string>
+    <string name="notification_channel_description">Zibonele FM audio player notifications</string>
 </resources>

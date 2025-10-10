@@ -1,0 +1,53 @@
+/* Global styles for the app */
+
+/* Make sure the app takes full height */
+html, body, #root, .ion-app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style for the main content area */
+ion-split-pane {
+  --side-width: 250px;
+  --side-max-width: 300px;
+}
+
+/* Container for the main content */
+ion-router-outlet {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fixed bottom banner styles */
+.fixed-bottom-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add padding to the bottom of the content to prevent it from being hidden behind the banner */
+ion-content {
+  --padding-bottom: 60px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  ion-split-pane {
+    --side-width: 100%;
+    --side-max-width: 100%;
+  }
+  
+  .fixed-bottom-banner {
+    height: 50px;
+  }
+  
+  ion-content {
+    --padding-bottom: 50px;
+  }
+}

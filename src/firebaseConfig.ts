@@ -1,9 +1,9 @@
-// src/firebaseConfig.js
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getDatabase } from "firebase/database";
-import { getStorage } from "firebase/storage";
+// src/firebaseConfig.ts
+// Import the compat version of Firebase
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/database';
+import 'firebase/compat/storage';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,17 +21,20 @@ const firebaseConfig = {
     measurementId: "G-MSRZRH1914"
 };
 
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const auth = getAuth(app);
-const storage = getStorage(app);
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const database = firebase.database();
+const storage = firebase.storage();
+
+// Firebase services are already initialized above
 
 // Function to get a download URL for a storage path
-const getImageUrl = async (path) => {
+const getImageUrl = async (path: string): Promise<string | null> => {
   try {
-    const { getDownloadURL, ref } = await import('firebase/storage');
-    const imageRef = ref(storage, path);
-    return await getDownloadURL(imageRef);
+    // Using the compat storage reference
+    const imageRef = storage.ref(path);
+    return await imageRef.getDownloadURL();
   } catch (error) {
     console.error('Error getting image URL:', error);
     return null;
