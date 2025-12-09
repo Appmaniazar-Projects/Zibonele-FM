@@ -51,3 +51,25 @@ ion-content {
     --padding-bottom: 50px;
   }
 }
+
+/* Global app bar styling */
+ion-toolbar {
+  --color: #D4AF37;
+}
+
+ion-title {
+  color: #D4AF37;
+}
+
+/* Back button: show only the white arrow */
+ion-back-button {
+  --color: #ffffff;
+}
+
+ion-back-button::part(text) {
+  display: none;
+}
+
+ion-back-button::part(icon) {
+  color: #ffffff;
+}

@@ -1,7 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { ref, onValue, DataSnapshot, get } from "firebase/database";
-import { database } from "../../firebaseConfig";
-import { NavButtons } from '../../components/Navbuttons/Navbuttons';
 import {
   IonBackButton,
   IonButtons,
@@ -15,10 +11,14 @@ import {
   IonPage,
   IonSegment,
   IonSegmentButton,
+  IonSpinner,
   IonTitle,
   IonToolbar,
-  IonSpinner,
 } from '@ionic/react';
+import { DataSnapshot, get, onValue, ref } from "firebase/database";
+import React, { useEffect, useState } from "react";
+import { NavButtons } from '../../components/Navbuttons/Navbuttons';
+import { database } from "../../firebaseConfig";
 import './LineUp.css';
 
 type Show = {
@@ -142,11 +142,11 @@ const LineUp: React.FC = () => {
       <IonHeader>
         <IonToolbar className="lineup-header" mode="ios">
           <IonTitle>Line Up</IonTitle>
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/home" />
-          </IonButtons>
           <IonButtons slot="end">
             <NavButtons />
+          </IonButtons>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/home" />
           </IonButtons>
         </IonToolbar>
       </IonHeader>

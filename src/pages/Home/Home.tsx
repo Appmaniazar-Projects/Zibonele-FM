@@ -1,20 +1,17 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonPage, 
-  IonTitle, 
-  IonToolbar, 
+import {
   IonButtons,
-  IonIcon, 
-  IonSpinner
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonPage,
+  IonSpinner,
+  IonTitle,
+  IonToolbar
 } from '@ionic/react';
-import { play, pause, radio, time } from 'ionicons/icons';
+import { pause, play, radio, time } from 'ionicons/icons';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { NavButtons } from '../../components/Navbuttons/Navbuttons';
 import './Home.css';
-
-// Import images
-import logoImage from '../../assets/images/FMRadio.png';
 
 type StreamStatus = 'idle' | 'loading' | 'playing' | 'error';
 
@@ -211,10 +208,10 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen>
+      <IonContent className="background" fullscreen>
         <div className="player-container">
           <div className="status-container">
-            <div className="station-name">Zibonele FM 98.2</div>
+            {/* <div className="station-name">Zibonele FM 98.2</div> */}
             <div className="status-badges">
               <div className="status-indicator">
                 <IonIcon icon={radio} />

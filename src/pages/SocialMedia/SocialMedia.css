@@ -1,7 +1,4 @@
-ion-content.background {
-  --background: url(../../../public/assets/img/FMRadio.png) 0 0/100% 100% no-repeat;
-  --padding-top: 80px; /* Add padding to move content below header */
-}
+
 
 /* Social list container */
 .social-list {
@@ -9,7 +6,7 @@ ion-content.background {
 }
 
 ion-fab-button {
-  color: #F7E734;
+  color: #D4AF37;
 }
 
 ion-icon {
@@ -63,7 +60,7 @@ ion-card:active {
 
 /* Icon styling */
 .social-item ion-icon {
-  color: #F7E734;
+  color: #D4AF37;
   font-size: 1.8rem;
 }
 
