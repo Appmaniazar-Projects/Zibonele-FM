@@ -48,6 +48,58 @@ ion-segment {
   transform: scale(1.02);
 }
 
+/* --- Play button overrides (ensure single, clean style) --- */
+.player-container .play-button {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #FFD700, #D4AF37);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(255, 215, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.player-container .play-button::after {
+  content: none;
+}
+
+.player-container .play-button.playing {
+  background: linear-gradient(145deg, #FFD700, #FFA500);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(255, 215, 0, 0.5);
+}
+
+.player-container .play-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.player-container .play-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.player-container .play-button ion-icon {
+  color: #000000;
+  font-size: 3.2rem;
+  position: static;
+  transform: none;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.player-container .play-button ion-spinner {
+  --color: #000000;
+}
+
 /* Player Container */
 .player-container {
   position: relative;

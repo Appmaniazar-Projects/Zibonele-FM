@@ -103,9 +103,6 @@ const Home: React.FC = () => {
     }
   }, [status, handlePlay, handlePause]);
 
-  // State to track if splash screen is visible
-  const [showSplash, setShowSplash] = useState(true);
-
   // Initialize audio and service worker
   useEffect(() => {
     // Initialize audio
@@ -163,11 +160,8 @@ const Home: React.FC = () => {
         await initServiceWorker();
         await requestNotificationPermission();
         
-        // Hide splash screen after initialization
-        setTimeout(() => setShowSplash(false), 2000);
       } catch (error) {
         console.error('Initialization error:', error);
-        setShowSplash(false);
       }
     };
 
@@ -228,13 +222,13 @@ const Home: React.FC = () => {
             className={`play-button ${status === 'playing' ? 'playing' : ''}`} 
             onClick={togglePlay}
             disabled={status === 'loading'}
+            aria-pressed={status === 'playing'}
+            aria-label={status === 'playing' ? 'Pause stream' : 'Play stream'}
           >
             {status === 'loading' ? (
               <IonSpinner name="crescent" />
-            ) : status === 'playing' ? (
-              <IonIcon icon={pause} />
             ) : (
-              <IonIcon icon={play} />
+              <IonIcon icon={status === 'playing' ? pause : play} />
             )}
           </button>
         </div>
