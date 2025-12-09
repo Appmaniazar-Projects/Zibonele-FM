@@ -32,13 +32,46 @@ const Home: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Show notification function
+  const showNotification = useCallback(() => {
+    if ('Notification' in window && Notification.permission === 'granted' && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.ready.then(registration => {
+        registration.showNotification('Zibonele FM 98.2', {
+          body: 'Now Playing',
+          icon: '/assets/icon/icon-192x192.png',
+          badge: '/assets/icon/icon-192x192.png',
+          data: { url: window.location.href },
+          requireInteraction: true
+        });
+      }).catch(error => {
+        console.error('Error showing notification:', error);
+      });
+    } else if ('Notification' in window && Notification.permission === 'granted') {
+      // Fallback to regular notification if service worker is not available
+      new Notification('Zibonele FM 98.2', {
+        body: 'Now Playing',
+        icon: '/assets/icon/icon-192x192.png'
+      });
+    }
+  }, []);
+
   const handlePlay = useCallback(async () => {
     if (!audioRef.current) return;
     
     try {
       setStatus('loading');
+      
+      // Request notification permission if not already granted
+      if ('Notification' in window && Notification.permission !== 'granted') {
+        const permission = await Notification.requestPermission();
+        console.log('Notification permission:', permission);
+      }
+      
       await audioRef.current.play();
       setStatus('playing');
+      
+      // Show notification when starting to play
+      showNotification();
       
       // Start time update interval
       timerRef.current = setInterval(() => {
@@ -51,7 +84,7 @@ const Home: React.FC = () => {
       console.error('Error playing audio:', error);
       setStatus('error');
     }
-  }, []);
+  }, [showNotification]);
 
   const handlePause = useCallback(() => {
     if (!audioRef.current) return;
@@ -73,84 +106,93 @@ const Home: React.FC = () => {
     }
   }, [status, handlePlay, handlePause]);
 
-  // Initialize audio element
+  // State to track if splash screen is visible
+  const [showSplash, setShowSplash] = useState(true);
+
+  // Initialize audio and service worker
   useEffect(() => {
+    // Initialize audio
     const audio = new Audio(STREAM_URL);
     audio.preload = 'auto';
     audio.crossOrigin = 'anonymous';
     audio.loop = true;
     audioRef.current = audio;
 
-    // Set up media session for background playback
-    if ('mediaSession' in navigator) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: 'Zibonele FM 98.2',
-        artist: 'Live Radio',
-        artwork: [
-          { src: '/assets/icon/icon-192x192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/assets/icon/icon-512x512.png', sizes: '512x512', type: 'image/png' }
-        ]
-      });
+    // Set up media session
+    const setupMediaSession = () => {
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: 'Zibonele FM',
+          artist: 'Live Radio',
+          artwork: [
+            { src: '/assets/icon/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+            { src: '/assets/icon/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+          ]
+        });
 
-      navigator.mediaSession.setActionHandler('play', handlePlay);
-      navigator.mediaSession.setActionHandler('pause', handlePause);
-    }
-
-    // Handle audio interruptions (phone calls, other media)
-    const handleAudioInterruption = () => {
-      console.log('Audio interrupted');
-      setStatus('idle');
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
+        navigator.mediaSession.setActionHandler('play', handlePlay);
+        navigator.mediaSession.setActionHandler('pause', handlePause);
       }
     };
 
-    const handleAudioResume = () => {
-      console.log('Audio can resume');
-      // Don't auto-resume, let user decide
-    };
-
-    // Listen for audio interruption events
-    audio.addEventListener('pause', () => {
-      // Only update status if it wasn't a user-initiated pause
-      if (status === 'playing') {
-        console.log('Audio paused by system');
-      }
-    });
-
-    audio.addEventListener('ended', () => {
-      console.log('Audio ended');
-      handleAudioInterruption();
-    });
-
-    audio.addEventListener('error', (e) => {
-      console.error('Audio error:', e);
-      setStatus('error');
-      handleAudioInterruption();
-    });
-
-    // Handle visibility change - keep playing when app goes to background
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        console.log('App went to background - audio continues');
-        // Don't pause - let it continue playing
-      } else {
-        console.log('App came to foreground');
+    // Initialize service worker
+    const initServiceWorker = async (): Promise<void> => {
+      if ('serviceWorker' in navigator) {
+        try {
+          const registration = await navigator.serviceWorker.register('/service-worker.js');
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        } catch (error) {
+          console.error('ServiceWorker registration failed: ', error);
+        }
       }
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    // Request notification permission
+    const requestNotificationPermission = async (): Promise<void> => {
+      if ('Notification' in window && Notification.permission === 'default') {
+        try {
+          const permission = await Notification.requestPermission();
+          console.log('Notification permission:', permission);
+        } catch (error) {
+          console.error('Error requesting notification permission:', error);
+        }
+      }
+    };
 
-    // Cleanup function
+    // Initialize everything
+    const initialize = async () => {
+      try {
+        setupMediaSession();
+        await initServiceWorker();
+        await requestNotificationPermission();
+        
+        // Hide splash screen after initialization
+        setTimeout(() => setShowSplash(false), 2000);
+      } catch (error) {
+        console.error('Initialization error:', error);
+        setShowSplash(false);
+      }
+    };
+
+    initialize();
+
+    // Cleanup
     return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (audioRef.current) {
         audioRef.current.pause();
-        audioRef.current = null;
+        audioRef.current.src = '';
+      }
+      
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+      
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations()
+          .then(registrations => {
+            registrations.forEach(registration => registration.unregister());
+          })
+          .catch(console.error);
       }
     };
   }, [handlePlay, handlePause]);

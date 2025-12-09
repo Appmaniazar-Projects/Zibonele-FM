@@ -5,9 +5,13 @@ buildscript {
         compileSdkVersion = 34
         minSdkVersion = 24
         targetSdkVersion = 34
-        
+        androidxAppCompatVersion = '1.6.1'
+        cordovaAndroidVersion = '10.1.1'
         // Kotlin
         kotlin_version = '1.9.20'
+           // Dependencies
+        androidxAppCompatVersion = '1.6.1'
+        cordovaAndroidVersion = '10.1.1'
     }
     
     repositories {

@@ -1,7 +1,7 @@
 .tabs-container {
 	position: fixed;
 	width: 100%;
-	background-color: #131212;
+	background-color: #2a2a2a;
 	border-bottom: 1px solid #F7E734;
 	z-index: 1000;
 }
@@ -138,4 +138,107 @@ main.row{
 .title{
      color: #F7E734;
      margin-bottom: 0px;;
+}
+
+/* In LineUp.css */
+.lineup-header {
+  --background: #1a1a1a;
+  --border-style: none;
+  --color: #ffffff;
+}
+
+.lineup-header ion-toolbar {
+  --background: #1a1a1a;
+  --color: #ffffff;
+  --border-width: 0;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  --min-height: 64px;
+}
+
+.lineup-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.back-button {
+  --color: #f7e734;
+  --padding-start: 8px;
+  --padding-end: 8px;
+}
+
+/* Update the content area to match the dark theme */
+ion-content {
+  --background: #1a1a1a;
+  --color: #ffffff;
+  --padding-top: 16px;
+}
+
+/* Style the segment to match the dark theme */
+ion-segment {
+  --background: #1a1a1a;
+  --color: #ffffff;
+  --color-checked: #f7e734;
+  --indicator-color: #f7e734;
+  margin-bottom: 16px;
+}
+
+ion-segment-button {
+  --color: rgba(255, 255, 255, 0.6);
+  --color-checked: #f7e734;
+  --indicator-color: #f7e734;
+  --border-radius: 20px;
+  --border-color: transparent;
+  --background: transparent;
+  --background-checked: rgba(247, 231, 52, 0.1);
+  min-width: 80px;
+  max-width: 100px;
+  height: 32px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  margin: 0 4px;
+}
+
+/* Style the cards to match the dark theme */
+ion-card {
+  --background: #2a2a2a;
+  color: #ffffff;
+  border-radius: 12px;
+  margin: 0 16px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+ion-card-header {
+  padding: 16px;
+  padding-bottom: 8px;
+}
+
+ion-card-title {
+  color: #f7e734;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+ion-card-content {
+  padding: 0 16px 16px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+/* Style the time and presenter text */
+ion-card-content p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+ion-card-content strong {
+  color: #ffffff;
+  margin-right: 8px;
 }

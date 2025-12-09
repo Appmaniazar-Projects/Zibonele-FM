@@ -10,6 +10,31 @@
   overflow: hidden;
 }
 
+
+/* .error-message {
+  color: var(--ion-color-danger);
+  padding: 16px;
+  text-align: center;
+  background: rgba(var(--ion-color-danger-rgb), 0.1);
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+ion-card {
+  margin: 16px 0;
+}
+
+ion-spinner {
+  margin: 16px auto;
+  --color: var(--ion-color-primary);
+}
+
+ion-segment {
+  margin-bottom: 16px;
+} */
+
+
+
 /* Background Image */
 .background-image {
   position: absolute;
@@ -132,6 +157,46 @@
     0 8px 20px rgba(0, 0, 0, 0.4),
     0 0 40px rgba(255, 215, 0, 0.5);
   animation: pulse 2s infinite;
+}
+
+/* Radio wave animation */
+.radio-waves {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.3s ease;
+}
+
+.radio-waves.playing {
+  opacity: 1;
+  transform: scale(1.4);
+  animation: radioWave 2s infinite;
+}
+
+.radio-waves.playing:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.radio-waves.playing:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes radioWave {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+    border: 4px solid rgba(255, 215, 0, 0.6);
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+    border: 2px solid rgba(255, 215, 0, 0.1);
+  }
 }
 
 @keyframes pulse {
