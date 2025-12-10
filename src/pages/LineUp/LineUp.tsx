@@ -140,7 +140,7 @@ const LineUp: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className="lineup-header" mode="ios">
+        <IonToolbar className="toolbar">
           <IonTitle>Line Up</IonTitle>
           <IonButtons slot="end">
             <NavButtons />
